@@ -1,4 +1,5 @@
 from github import Github
+from config import GH_TOKEN
 from datetime import datetime
 import os
 import logging
@@ -9,7 +10,7 @@ logger = logging.getLogger(__name__)
 class GitHubHandler:
     def __init__(self):
         self.github = Github(GH_TOKEN)
-        self.repo = self.github.get_user(REPO_OWNER).get_repo(REPO_NAME)
+        self.repo = self.github.get_repo(f"{REPO_OWNER}/{REPO_NAME}")
 
     def commit_report(self, report_content):
         """Commit the daily report to GitHub"""
