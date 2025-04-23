@@ -1,3 +1,4 @@
+import os
 import logging.config
 from datetime import datetime
 from gemini_fetcher import GeminiFetcher
