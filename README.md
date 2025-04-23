@@ -17,8 +17,9 @@ This bot automatically fetches daily news, performs analysis, and commits the re
 2. Clone this repository and push it to your new GitHub repository
 3. Set up GitHub Secrets:
    - Go to your repository's Settings > Secrets and Variables > Actions
-   - Add the following secret:
+   - Add these secrets:
      - `NEWS_API_KEY`: Your NewsAPI key from https://newsapi.org
+     - `GH_TOKEN`: Personal access token with repo permissions (classic)
 
 That's it! The bot will automatically:
 
@@ -40,9 +41,9 @@ pip install -r requirements.txt
 3. Create a `.env` file in the root directory with the following variables:
 
 ```
-GITHUB_TOKEN=your_github_token
-GITHUB_REPO=your_repository_name
-GITHUB_USERNAME=your_github_username
+GH_TOKEN=your_github_token
+REPO_NAME=your_repository_name
+REPO_OWNER=your_github_username
 NEWS_API_KEY=your_newsapi_key
 ```
 

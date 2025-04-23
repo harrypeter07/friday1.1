@@ -59,7 +59,7 @@ if __name__ == "__main__":
     logging.config.dictConfig(LOGGING_CONFIG)
     
     # Schedule daily job
-    schedule.every().day.at(os.getenv('COMMIT_TIME', '06:00')).do(run_daily_analysis)
+    schedule.every(1).minutes.do(run_daily_analysis)
     logger.info(f"Scheduled analysis to run daily at {os.getenv('COMMIT_TIME', '06:00')}")
     
     # Keep process running
