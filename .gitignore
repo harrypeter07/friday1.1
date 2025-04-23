@@ -1,0 +1,21 @@
+# Environment files
+.env
+.env.example
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# IDE files
+.idea/
+.vscode/
+
+# Logs and databases
+*.log
+*.sqlite
+
+# Local development
+*.env.local
+
+# Testing artifacts
+.pytest_cache/
