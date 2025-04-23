@@ -2,7 +2,7 @@ name: Daily AI Analysis Commit
 
 on:
   schedule:
-    - cron: "* * * * *" # Every minute for testing
+    - cron: "* * * * *" # Run daily at midnight UTC
   workflow_dispatch:
 
 jobs:
@@ -27,6 +27,8 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
-          REPO_NAME: ${{ github.repository }}
+          REPO_NAME: ${{ secrets.REPO_NAME }} # Use secret: friday1.1
+          REPO_OWNER: ${{ secrets.REPO_OWNER }} # Use secret: harrypeter07
+        working-directory: ./ # Repository root
         run: |
           python -m src.main
