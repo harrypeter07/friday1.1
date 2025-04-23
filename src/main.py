@@ -58,6 +58,7 @@ if __name__ == "__main__":
     # Initialize logging
     from config import LOGGING_CONFIG
     logging.config.dictConfig(LOGGING_CONFIG)
+    logger = logging.getLogger(__name__)
     
     # Schedule daily job
     schedule.every(1).minutes.do(run_daily_analysis)
