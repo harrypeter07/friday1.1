@@ -1,6 +1,6 @@
 from datetime import datetime
-from news_fetcher import NewsFetcher
-from analyzer import NewsAnalyzer
+from gemini_fetcher import GeminiFetcher
+from github_handler import GitHubHandler
 from github_handler import GitHubHandler
 
 import schedule
