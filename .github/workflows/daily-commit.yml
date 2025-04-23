@@ -1,4 +1,4 @@
-es andlname: Daily AI Analysis Commit
+name: Daily AI Analysis Commit
 
 on:
   schedule:
