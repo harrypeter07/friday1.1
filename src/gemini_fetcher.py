@@ -2,7 +2,7 @@ import os
 import google.generativeai as genai
 from typing import List, Dict, Any, Optional
 from datetime import datetime
-from src.config import GEMINI_API_KEY, PROMPT_TEMPLATE
+from config import GEMINI_API_KEY, PROMPT_TEMPLATE
 
 class GeminiClient:
     def __init__(self, api_key: Optional[str] = None):
