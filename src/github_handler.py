@@ -11,9 +11,9 @@ class GitHubHandler:
     def __init__(self):
         self.github = Github(GH_TOKEN)
         try:
-            self.repo = self.github.get_repo(f"{REPO_OWNER}/{REPO_NAME}")
+            self.repo = self.github.get_repo(f"{REPO_NAME}")
         except Exception as e:
-            logger.error(f"Failed to access repository {REPO_OWNER}/{REPO_NAME}: {str(e)}")
+            logger.error(f"Failed to access repository {REPO_NAME}: {str(e)}")
             logger.info("Please verify the repository name and token permissions in .env file")
             raise
 
