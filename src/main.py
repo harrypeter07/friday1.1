@@ -8,6 +8,11 @@ from github_handler import GitHubHandler
 import schedule
 import time
 
+# Initialize logging
+from config import LOGGING_CONFIG
+logging.config.dictConfig(LOGGING_CONFIG)
+logger = logging.getLogger(__name__)
+
 def run_daily_analysis():
     """Run the daily AI insights analysis and commit to GitHub"""
     logger.info(f"Starting daily analysis at {datetime.now()}")
@@ -54,11 +59,6 @@ def run_daily_analysis():
     except Exception as e:
         print(f"Error in daily analysis: {str(e)}")
         raise e  # Re-raise the exception to make GitHub Actions mark the run as failed
-
-# Initialize logging
-from config import LOGGING_CONFIG
-logging.config.dictConfig(LOGGING_CONFIG)
-logger = logging.getLogger(__name__)
 
 if __name__ == "__main__":
     
