@@ -33,6 +33,7 @@ jobs:
           REPO_NAME: ${{ secrets.REPO_NAME }}
           REPO_OWNER: ${{ secrets.REPO_OWNER }}
           NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+          PYTHONPATH: ${{ github.workspace }}/src
         run: |
           python src/main.py
         continue-on-error: false # Ensure workflow fails on errors
