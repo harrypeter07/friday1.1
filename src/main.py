@@ -1,15 +1,15 @@
 import os
 import logging.config
 from datetime import datetime
-from .gemini_fetcher import GeminiFetcher
-from .github_handler import GitHubHandler
-from .config import REPORT_TEMPLATE
+from src.gemini_fetcher import GeminiFetcher
+from src.github_handler import GitHubHandler
+from src.config import REPORT_TEMPLATE
 
 import schedule
 import time
 
 # Initialize logging
-from config import LOGGING_CONFIG
+from src.config import LOGGING_CONFIG
 logging.config.dictConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
 

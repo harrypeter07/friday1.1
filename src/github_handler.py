@@ -1,9 +1,9 @@
 from github import Github
-from config import GH_TOKEN
+from src.config import GH_TOKEN
 from datetime import datetime
 import os
 import logging
-from config import GH_TOKEN as GITHUB_TOKEN, REPO_NAME, REPO_OWNER
+from src.config import GH_TOKEN as GITHUB_TOKEN, REPO_NAME, REPO_OWNER
 
 logger = logging.getLogger(__name__)
 
