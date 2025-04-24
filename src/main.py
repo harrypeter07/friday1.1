@@ -1,9 +1,9 @@
 import os
 import logging.config
 from datetime import datetime
-from gemini_fetcher import GeminiFetcher
-from github_handler import GitHubHandler
-from config import REPORT_TEMPLATE
+from .gemini_fetcher import GeminiFetcher
+from .github_handler import GitHubHandler
+from .config import REPORT_TEMPLATE
 
 import schedule
 import time
