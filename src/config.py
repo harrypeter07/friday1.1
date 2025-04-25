@@ -5,12 +5,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # GitHub Configuration
-GH_TOKEN = os.getenv('GH_TOKEN')
+GH_TOKEN = os.getenv('GITHUB_TOKEN') or os.getenv('GH_TOKEN')
 REPO_NAME = os.getenv('REPO_NAME')
 REPO_OWNER = os.getenv('REPO_OWNER')
 
 # Gemini API Configuration
-GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+GEMINI_API_KEY = os.getenv('GOOGLE_API_KEY') or os.getenv('GEMINI_API_KEY')
 GEMINI_MODEL = 'gemini-pro'
 
 # Application Configuration

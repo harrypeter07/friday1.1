@@ -11,8 +11,12 @@ class GitHubHandler:
     def __init__(self):
         self.github = Github(GH_TOKEN)
         try:
-            # Use the correct repository format: owner/repo
-            repo_path = f"{REPO_OWNER}/{REPO_NAME}"
+            # Handle both formats: owner/repo or just repo name
+            if '/' in REPO_NAME:
+                repo_path = REPO_NAME
+            else:
+                repo_path = f"{REPO_OWNER}/{REPO_NAME}"
+                
             logger.info(f"Attempting to access repository: {repo_path}")
             self.repo = self.github.get_repo(repo_path)
             logger.info("Successfully connected to repository")
