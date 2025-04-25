@@ -49,7 +49,7 @@ def run_task():
         report = REPORT_TEMPLATE.format(
             date=datetime.now().strftime('%Y-%m-%d %H:%M'),
             content=insights['content'],
-            topic_insights="Generated every 2 minutes for testing",
+            topic_insights="Daily analysis - 40 updates per day",
             model=insights['model'],
             timestamp=insights['timestamp']
         )
@@ -67,7 +67,11 @@ def run_task():
         logger.exception("Full error details:")
 
 def run_scheduler():
-    logger.info("Starting scheduler with 40 daily commits (every 36 minutes)")
+    logger.info("Starting scheduler with exactly 40 daily commits")
+    
+    # Calculate the interval for 40 commits per day
+    # 24 hours * 60 minutes = 1440 minutes per day
+    # 1440 minutes / 40 commits = 36 minutes between commits
     
     # Run immediately on startup
     run_task()

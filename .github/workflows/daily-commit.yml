@@ -2,7 +2,8 @@ name: Daily AI Analysis Commit
 
 on:
   schedule:
-    - cron: "* * * * *" # Run daily at midnight UTC
+    # Run every 36 minutes (40 times per day)
+    - cron: "*/36 * * * *"
   workflow_dispatch:
 
 # Add permissions block
@@ -26,7 +27,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run daily analysis
+      - name: Run analysis
         env:
           GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}

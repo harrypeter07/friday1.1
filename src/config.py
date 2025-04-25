@@ -26,12 +26,14 @@ Generated on: {date}
 ## Analysis
 {content}
 
-## Additional Notes
+## Schedule Information
 {topic_insights}
+- Updates occur every 36 minutes
+- Total of 40 updates per day
+- Timestamp: {timestamp}
 
 ## Generation Info
 Model: {model}
-Timestamp: {timestamp}
 '''
 
 # Logging Configuration
