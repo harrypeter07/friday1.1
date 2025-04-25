@@ -67,13 +67,13 @@ def run_task():
         logger.exception("Full error details:")
 
 def run_scheduler():
-    logger.info("Starting scheduler with 2-minute intervals for testing")
+    logger.info("Starting scheduler with 40 daily commits (every 36 minutes)")
     
     # Run immediately on startup
     run_task()
     
-    # Schedule to run every 2 minutes
-    schedule.every(2).minutes.do(run_task)
+    # Schedule to run every 36 minutes
+    schedule.every(36).minutes.do(run_task)
     
     # Keep the scheduler running
     while True:
