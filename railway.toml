@@ -1,7 +1,18 @@
 [build]
 builder = "nixpacks"
-buildCommand = "pip install -r requirements.txt"
 
 [deploy]
-startCommand = "python -m src.main"
-restartPolicyType = "always" 
+startCommand = "bash start.sh"
+healthcheckPath = "/"
+healthcheckTimeout = 100
+restartPolicyType = "always"
+
+[phases.setup]
+cmds = ["python -m venv /opt/venv"]
+
+[phases.install]
+cmds = [
+    "source /opt/venv/bin/activate",
+    "pip install --upgrade pip",
+    "pip install -r requirements.txt"
+] 
