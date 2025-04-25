@@ -60,7 +60,7 @@ def run_task():
         if success:
             logger.info("Task completed successfully")
         else:
-            logger.error("Failed to commit the report to GitHub")
+            logger.error("Failed to commit the report to GitHubg")
 
     except Exception as e:
         logger.error(f"Error in task: {str(e)}")
