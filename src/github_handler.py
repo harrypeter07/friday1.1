@@ -38,17 +38,19 @@ class GitHubHandler:
             try:
                 # Try to get the file content first
                 file = self.repo.get_contents(file_path)
+                timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 self.repo.update_file(
                     file_path,
-                    f"Update news analysis report for {date_str}",
+                    f"Update news analysis report for {date_str} at {timestamp}",
                     report_content,
                     file.sha
                 )
             except Exception:
                 # File doesn't exist, create it
+                timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 self.repo.create_file(
                     file_path,
-                    f"Add news analysis report for {date_str}",
+                    f"Add news analysis report for {date_str} at {timestamp}",
                     report_content
                 )
 
