@@ -31,18 +31,28 @@ class GitHubHandler:
     def commit_report(self, report_content):
         """Commit the daily report to GitHub"""
         try:
-            # Create file path with date
-            date_str = datetime.now().strftime('%Y-%m-%d')
-            file_path = f'reports/{date_str}-news-analysis.md'
+            # Use a single file for all reports
+            file_path = 'reports/daily-analysis.md'
 
             try:
                 # Try to get the file content first
                 file = self.repo.get_contents(file_path)
                 timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                
+                # Append the new report to the existing content
+                try:
+                    current_content = file.decoded_content.decode('utf-8')
+                except:
+                    current_content = ""
+                
+                # Add a separator between reports
+                separator = "\n\n---\n\n"
+                new_content = current_content + separator + report_content if current_content else report_content
+                
                 self.repo.update_file(
                     file_path,
-                    f"Update news analysis report for {date_str} at {timestamp}",
-                    report_content,
+                    f"Update news analysis report at {timestamp}",
+                    new_content,
                     file.sha
                 )
             except Exception:
@@ -50,11 +60,11 @@ class GitHubHandler:
                 timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 self.repo.create_file(
                     file_path,
-                    f"Add news analysis report for {date_str} at {timestamp}",
+                    f"Add news analysis report at {timestamp}",
                     report_content
                 )
 
-            logger.info(f"Successfully committed report for {date_str}")
+            logger.info(f"Successfully committed report at {timestamp}")
             return True
 
         except Exception as e:
