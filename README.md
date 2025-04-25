@@ -1,6 +1,46 @@
-# Automated News Analysis Bot
+# AI Insights Bot
 
-This bot automatically fetches daily news, performs analysis, and commits the results to GitHub. It runs completely autonomously using GitHub Actions.
+A Python application that uses Gemini AI to generate insights and automatically commits them to GitHub. Currently configured to run every 2 minutes for testing purposes.
+
+## Quick Deploy on Railway
+
+1. Fork this repository
+2. Go to [Railway](https://railway.app/)
+3. Create new project → Deploy from GitHub repo
+4. Add these environment variables:
+   - `GEMINI_API_KEY`: Your Google Gemini API key
+   - `GH_TOKEN`: Your GitHub personal access token
+   - `REPO_NAME`: Your GitHub repository name
+   - `REPO_OWNER`: Your GitHub username
+
+## Local Testing
+
+1. Clone the repository
+2. Create `.env` file with the above environment variables
+3. Run:
+
+```bash
+pip install -r requirements.txt
+python -m src.main
+```
+
+## How it Works
+
+1. Fetches AI insights using Gemini API
+2. Generates a markdown report
+3. Commits to your GitHub repository
+4. Repeats every 2 minutes (for testing)
+
+## Note
+
+Currently set to run every 2 minutes for testing. To change this, modify the schedule in `src/main.py`.
+
+## Environment Variables
+
+- `GEMINI_API_KEY`: Google Gemini API key
+- `GH_TOKEN`: GitHub personal access token
+- `REPO_NAME`: GitHub repository name
+- `REPO_OWNER`: GitHub username
 
 ## Features
 
