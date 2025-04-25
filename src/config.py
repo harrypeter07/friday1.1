@@ -11,7 +11,7 @@ REPO_OWNER = os.getenv('REPO_OWNER')
 
 # Gemini API Configuration
 GEMINI_API_KEY = os.getenv('GOOGLE_API_KEY') or os.getenv('GEMINI_API_KEY')
-GEMINI_MODEL = 'gemini-pro'
+GEMINI_MODEL = 'gemini-2.0-flash'
 
 # Prompt Template
 PROMPT_TEMPLATE = """Generate a thoughtful insight about current technology trends and developments. Include:
