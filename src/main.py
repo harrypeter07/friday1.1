@@ -4,7 +4,8 @@ from datetime import datetime
 from src.gemini_fetcher import GeminiFetcher
 from src.github_handler import GitHubHandler
 from src.config import REPORT_TEMPLATE
-
+import threading
+from http.server import HTTPServer, BaseHTTPRequestHandler
 import schedule
 import time
 
@@ -12,6 +13,19 @@ import time
 from src.config import LOGGING_CONFIG
 logging.config.dictConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
+
+class HealthCheckHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'text/plain')
+        self.end_headers()
+        self.wfile.write(b"Service is running")
+
+def run_http_server():
+    port = int(os.environ.get('PORT', 8000))
+    server = HTTPServer(('0.0.0.0', port), HealthCheckHandler)
+    logger.info(f"Starting HTTP server on port {port}")
+    server.serve_forever()
 
 def run_task():
     """Run the task to fetch data from Gemini API and commit to GitHub"""
@@ -52,8 +66,8 @@ def run_task():
         logger.error(f"Error in task: {str(e)}")
         logger.exception("Full error details:")
 
-if __name__ == "__main__":
-    logger.info("Starting application with 2-minute intervals for testing")
+def run_scheduler():
+    logger.info("Starting scheduler with 2-minute intervals for testing")
     
     # Run immediately on startup
     run_task()
@@ -61,7 +75,15 @@ if __name__ == "__main__":
     # Schedule to run every 2 minutes
     schedule.every(2).minutes.do(run_task)
     
-    # Keep the process running
+    # Keep the scheduler running
     while True:
         schedule.run_pending()
-        time.sleep(30)  # Check every 30 seconds
+        time.sleep(30)
+
+if __name__ == "__main__":
+    # Start the HTTP server in a separate thread
+    http_thread = threading.Thread(target=run_http_server, daemon=True)
+    http_thread.start()
+    
+    # Run the scheduler in the main thread
+    run_scheduler()
