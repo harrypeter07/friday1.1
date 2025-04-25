@@ -13,9 +13,9 @@ from src.config import LOGGING_CONFIG
 logging.config.dictConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
 
-def run_daily_analysis():
-    """Run the daily AI insights analysis and commit to GitHub"""
-    logger.info(f"Starting daily analysis at {datetime.now()}")
+def run_daily_task():
+    """Run the daily task to fetch data from Gemini API and commit to GitHub"""
+    logger.info(f"Starting daily task at {datetime.now()}")
     
     try:
         # Initialize components
@@ -25,25 +25,17 @@ def run_daily_analysis():
         # Ensure GitHub repository is properly set up
         github_handler.ensure_report_directory()
 
-        # Fetch daily insights
+        # Fetch daily insights from Gemini API
         insights = gemini_fetcher.fetch_daily_insights()
         if not insights:
-            print("No insights fetched. Skipping analysis.")
+            logger.error("No insights fetched from Gemini API. Skipping analysis.")
             return
 
-        # Fetch additional topic insights
-        topics = ["AI and Technology", "Global Economy", "Climate Change"]
-        topic_insights = []
-        for topic in topics:
-            topic_result = gemini_fetcher.fetch_topic_insights(topic)
-            if topic_result:
-                topic_insights.append(topic_result)
-        
         # Generate report
         report = REPORT_TEMPLATE.format(
             date=datetime.now().strftime('%Y-%m-%d'),
             content=insights['content'],
-            topic_insights='\n'.join([f"### {t['topic']}\n{t['content']}" for t in topic_insights]),
+            topic_insights="No additional insights",
             model=insights['model'],
             timestamp=insights['timestamp']
         )
@@ -52,19 +44,19 @@ def run_daily_analysis():
         success = github_handler.commit_report(report)
         
         if success:
-            print("Daily AI insights analysis completed successfully")
+            logger.info("Daily task completed successfully")
         else:
-            print("Failed to commit the report to GitHub")
+            logger.error("Failed to commit the report to GitHub")
 
     except Exception as e:
-        print(f"Error in daily analysis: {str(e)}")
-        raise e  # Re-raise the exception to make GitHub Actions mark the run as failed
+        logger.error(f"Error in daily task: {str(e)}")
+        raise e
 
 if __name__ == "__main__":
     
     # Schedule daily job
-    schedule.every(1).minutes.do(run_daily_analysis)
-    logger.info(f"Scheduled analysis to run daily at {os.getenv('COMMIT_TIME', '06:00')}")
+    schedule.every(1).minutes.do(run_daily_task)
+    logger.info(f"Scheduled task to run daily at {os.getenv('COMMIT_TIME', '06:00')}")
     
     # Keep process running
     while True:

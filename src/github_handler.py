@@ -11,10 +11,17 @@ class GitHubHandler:
     def __init__(self):
         self.github = Github(GH_TOKEN)
         try:
-            self.repo = self.github.get_repo(f"{REPO_NAME}")
+            # Use the correct repository format: owner/repo
+            repo_path = f"{REPO_OWNER}/{REPO_NAME}"
+            logger.info(f"Attempting to access repository: {repo_path}")
+            self.repo = self.github.get_repo(repo_path)
+            logger.info("Successfully connected to repository")
         except Exception as e:
-            logger.error(f"Failed to access repository {REPO_NAME}: {str(e)}")
-            logger.info("Please verify the repository name and token permissions in .env file")
+            logger.error(f"Failed to access repository {repo_path}: {str(e)}")
+            logger.info("Please verify:")
+            logger.info("1. The repository exists at github.com/{repo_path}")
+            logger.info("2. The GitHub token has access to the repository")
+            logger.info("3. The repository name and owner are correct in .env file")
             raise
 
     def commit_report(self, report_content):
