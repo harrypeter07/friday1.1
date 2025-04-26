@@ -3,7 +3,7 @@ name: Daily AI Analysis Commit
 on:
   schedule:
     # Run every 36 minutes (40 times per day)
-    - cron: "*/36 * * * *"
+    - cron: "0 */2 * * *"
   workflow_dispatch:
 
 # Add permissions block
